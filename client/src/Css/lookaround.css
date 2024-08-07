@@ -1,0 +1,140 @@
+.container {
+    height: 100%;
+    width: 100vw;
+    padding: 3rem 3rem 0rem 3rem;
+    background-color: rgb(249, 250, 252);
+}
+
+.heading {
+    margin: 2rem 0rem;
+    font-size: 3rem;
+    color: var(--primary-color);
+    letter-spacing: 3px;
+    font-weight: 400;
+    text-align: center;
+    font-family: "Inika";
+}
+
+.swiper_container {
+    height: 40rem;
+    position: relative;
+    transform: none;
+}
+
+.swiper-slide {
+    width: 37rem;
+    height: 42rem;
+    position: relative;
+}
+
+.swiper-slide img {
+    position: relative;
+    left: 20%;
+    width: 60%;
+    height: 70%;
+    border-radius: 2rem;
+    object-fit: cover;
+}
+
+.swiper-slide-shadow-left,
+.swiper-slide-shadow-right {
+    display: none;
+}
+
+.slider-controler {
+    position: relative;
+    bottom: 5rem;
+    display: flex;
+    align-items: center;
+}
+
+.slider-controler .slider-arrow {
+    color: rgb(132, 129, 129);
+    width: 2.5rem;
+    height: 2.5rem;
+    transition: .3s all linear;
+}
+
+.slider-controler .slider-arrow::after {
+    content: '';
+}
+
+.slider-controler .swiper-button-next {
+    left: 53% !important;
+    transform: translateX(-48%) !important;
+}
+
+.slider-controler .slider-arrow {
+    width: 2.5rem;
+    height: 2.5rem;
+    left: 47%;
+    transform: translateX(-48%);
+}
+
+.slider-controler .slider-arrow:hover {
+    color: rgb(75, 75, 75);
+    transition: .3s all linear;
+}
+
+.slider-title {
+    position: relative;
+    left: 20.5%;
+    font-size: 1.5rem;
+    letter-spacing: 1.5px;
+    margin-top: .5rem;
+    font-weight: 400;
+    text-transform: uppercase;
+}
+
+@media (max-width:770px){
+    .swiper-slide img{
+        width: 80%;
+        height: 80%;
+        left: 5%;
+    }
+    .swiper_container{
+        height: 40vh;
+        width: 100vw;
+    }
+        .slider-title{
+            font-size: 1.5rem;
+            left: 8%;
+        }
+
+        .slider-controler .slider-arrow {
+            width: 2.5rem;
+            height: 2.5rem;
+            left: 35%;
+            transform: translateX(-35%);
+            margin-top: 2rem;
+        }
+}
+@media (max-width:480px){
+    .swiper-slide img{
+        width: 90%;
+        height: 70%;
+    }
+    .swiper_container{
+        height: 40vh;
+        width: 100vw;
+        right: 15%;
+    }
+        .slider-title{
+            font-size: 1rem;
+            left: 8%;
+        }
+
+        .slider-controler .slider-arrow {
+            display: none;
+        }
+
+
+.heading {
+    margin: 0rem 0rem 1rem 0rem ;
+    font-size: 2rem;
+    letter-spacing: 3px;
+    font-weight: 400;
+    text-align: center;
+    font-family: "Inika";
+}
+}

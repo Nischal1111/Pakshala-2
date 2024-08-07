@@ -1,0 +1,103 @@
+.admin-dashboard{
+    margin-left: 20%;
+}
+
+.dashboard-title:before{
+    content: "";
+    width: 3px;
+    border-radius: 1rem;
+    background-color: rgb(224, 130, 15);
+    position: absolute;
+    top:2.2rem;
+    right: 77%;
+    margin-right: 1rem;
+    height: 2.5rem;
+}
+.dashboard-title{
+    font-size: 2.5rem;
+    font-weight: 300;
+    letter-spacing: 2px;
+    margin: 2rem 3rem;
+    color: rgb(224, 130, 15);
+}
+
+.dashboard{
+    margin-left: 3rem;
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+.dashboard-card{
+    background-color:rgb(249, 249, 249);
+    padding: 2rem;
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: space-between;
+    border-left: 3px solid rgb(254, 143, 8);
+    border-right: 1px solid rgb(254, 143, 8);
+    width: 90%;
+    transition: all .4s;
+}
+
+.dashboard-card:hover{
+    transform: scale(1.02);
+    background-color: rgb(251, 241, 230);
+    transition: all .4s;
+}
+
+.link-dash{
+    text-decoration: none;
+
+    p{
+        color: rgb(255, 140, 0);
+        font-size: 1.6rem;
+        letter-spacing: 1px;
+        
+    }
+    .dash-icon{
+        font-size: 2rem;
+        color: rgb(255, 140, 0);
+        margin-right: 1rem;
+    }
+}
+
+/* menu-dash */
+.menu-dash-page{
+    margin-left: 20%;
+}
+
+.tabs-order{
+    margin-left: 1rem;
+    border-radius: 2rem;
+    padding: .6rem 1.5rem;
+    margin-bottom: 1rem;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    font-size: 2rem;
+    text-transform: capitalize;
+}
+
+.order-line{
+    width: 100%;
+
+}
+
+.toast-custom {
+    background-color: orange !important;
+    color: white !important;
+
+
+}
+.toast-custom .Toastify__toast-icon>svg {
+    fill: white !important;
+    /* Change the icon color */
+}
+
+.toast-custom .Toastify__progress-bar {
+    background: white !important;
+    /* Change the progress bar color */
+}

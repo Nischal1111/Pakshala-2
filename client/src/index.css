@@ -1,0 +1,68 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+:root {
+  --primary-color: #b3280b;
+  --hover-color: #d42906;
+  --secondary-color:#bbbbf7;
+}
+
+.toast-custom {
+  background-color: orange !important;
+  color: white !important;
+
+
+}
+
+.toast-custom .Toastify__toast-icon>svg {
+  fill: white !important;
+  /* Change the icon color */
+}
+
+.toast-custom .Toastify__progress-bar {
+  background: white !important;
+  /* Change the progress bar color */
+}
+
+.form-reserve:hover{
+  background-color: var(--hover-color);
+  padding: 5px 12px;
+  font-size: 12px;
+  border-radius: .2rem;
+  transition: .3s all;
+  color: white;
+}
+
+.form-cancel{
+  color: rgb(244, 104, 104);
+  transition: .3s all;
+}
+.form-cancel:hover{
+  transform: scale(1.05);
+    transition: .3s all;
+}
+
+.table-form input:focus{
+  outline: none;
+}
+.event-button{
+  background-color: var(--primary-color);
+  transition: .3s all;
+}
+.event-button:hover{
+  background-color: var(--hover-color);
+  transition: .3s all;
+  transform: scale(1.04);
+}

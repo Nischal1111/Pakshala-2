@@ -1,0 +1,15 @@
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+:root {
+  --primary-color: #b3280b;
+  --hover-color: #d42906;
+  --secondary-color: #bbbbf7;
+}
