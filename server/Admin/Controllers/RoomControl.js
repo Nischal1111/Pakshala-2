@@ -156,14 +156,11 @@ const deleteRoom = async (req, res) => {
 
 
 
-// editing the room data
 const editRoom = async (req, res) => {
     try {
         const { id } = req.params;
-        const { room_name, room_old_price ,room_price, room_category,room_single_beds,room_double_beds,room_guests } = req.body;
+        const { room_name, room_old_price, room_price, room_category, room_single_beds, room_double_beds, room_guests } = req.body;
         const files = req.files;
-
-        // console.log(files)
 
         // Find the room by id
         const room = await Room.findById(id);
@@ -173,29 +170,26 @@ const editRoom = async (req, res) => {
 
         // Prepare new image paths if provided
         const imagePaths = {
-            img1: files.img1 ? files.img1[0].path : null,
-            img2: files.img2 ? files.img2[0].path : null,
-            img3: files.img3 ? files.img3[0].path : null,
-            img4: files.img4 ? files.img4[0].path : null,
+            img1: files?.img1 ? files.img1[0].path : null,
+            img2: files?.img2 ? files.img2[0].path : null,
+            img3: files?.img3 ? files.img3[0].path : null,
+            img4: files?.img4 ? files.img4[0].path : null,
         };
 
         // Prepare old image public IDs
         const oldImageIds = {
-            img1: room.room_image1.public_id,
-            img2: room.room_image2.public_id,
-            img3: room.room_image3.public_id,
-            img4: room.room_image4.public_id,
+            img1: room.room_image1?.public_id,
+            img2: room.room_image2?.public_id,
+            img3: room.room_image3?.public_id,
+            img4: room.room_image4?.public_id,
         };
 
-        if (files.img1)
-            await deleteFile(oldImageIds.img1);
-        if(files.img2)
-            await deleteFile(oldImageIds.img2);
-        if(files.img3)
-            await deleteFile(oldImageIds.img3);
-        if(files.img4)
-            await deleteFile(oldImageIds.img4);
-
+        // Delete old images if new ones are provided
+        for (const [key, value] of Object.entries(imagePaths)) {
+            if (value && oldImageIds[key]) {
+                await deleteFile(oldImageIds[key]);
+            }
+        }
 
         // Upload new images and gather URLs
         const imageUploads = Object.keys(imagePaths).map(key => 
@@ -203,18 +197,7 @@ const editRoom = async (req, res) => {
         );
         const uploadedImages = await Promise.all(imageUploads);
 
-
-
-        // Update the room data
-        room.room_name = room_name;
-        room.room_price = room_price;
-        room.room_category = room_category;
-        room.room_guests=room_guests;
-        room.room_single_beds = room_single_beds;
-        room.room_double_beds = room_double_beds;
-        room.room_old_price = room_old_price;
-
-        // Update room images
+        // Update room images if new ones are uploaded
         if (uploadedImages[0]) {
             room.room_image1 = {
                 url: uploadedImages[0].secure_url,
@@ -240,15 +223,25 @@ const editRoom = async (req, res) => {
             };
         }
 
+        // Update the room data
+        if (room_name) room.room_name = room_name;
+        if (room_price) room.room_price = room_price;
+        if (room_category) room.room_category = room_category;
+        if (room_guests) room.room_guests = room_guests;
+        if (room_single_beds) room.room_single_beds = room_single_beds;
+        if (room_double_beds) room.room_double_beds = room_double_beds;
+        if (room_old_price) room.room_old_price = room_old_price;
+
         // Save the updated room data
         await room.save();
 
         res.status(200).json({ success: true, message: 'Room item edited successfully' });
     } catch (error) {
-        // console.error('Error editing room item:', error); 
+        console.error('Error editing room item:', error); 
         res.status(500).json({ success: false, message: 'Internal server error on Edit room Item' });
     }
 };
+
 
 // for updateing the current status of the ROom >> to make booked room available >> admin manually do this  
 
