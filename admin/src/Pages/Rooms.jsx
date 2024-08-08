@@ -24,7 +24,7 @@ const Rooms = () => {
     title: "",
     category: "",
     price: "",
-    old_price:"",
+    old_price: "",
     guests: 0,
     single_beds: 0,
     double_beds: 0,
@@ -37,7 +37,7 @@ const Rooms = () => {
     title: false,
     category: false,
     price: false,
-    old_price:false,
+    old_price: false,
     guests: false,
     single_beds: false,
     double_beds: false,
@@ -57,7 +57,7 @@ const Rooms = () => {
     title: "",
     category: "",
     price: "",
-    old_price:"",
+    old_price: "",
     guests: "",
     single_beds: "",
     double_beds: "",
@@ -132,7 +132,7 @@ const Rooms = () => {
       } else if (
         name === "room_name" ||
         name === "room_category" ||
-        name==="room_old_price"||
+        name === "room_old_price" ||
         name === "room_price" ||
         name === "room_guests" ||
         name === "room_single_beds" ||
@@ -142,7 +142,7 @@ const Rooms = () => {
           ...editRoomData,
           [name]:
             name === "room_price" ||
-            name==="room_old_price" ||
+            name === "room_old_price" ||
             name === "room_guests" ||
             name === "room_single_beds" ||
             name === "room_double_beds"
@@ -155,27 +155,27 @@ const Rooms = () => {
     } else {
       if (name === "img") {
         setNewRoom({ ...newRoom, img: files[0] })
-        setImagePreview(URL.createObjectURL(files[0]))
+        setImagePreview(URL?.createObjectURL(files[0]))
         setErrors({ ...errors, img: false })
       } else if (name === "miniImg1") {
         setNewRoom({ ...newRoom, miniImg1: files[0] })
         setMiniImagePreview({
           ...miniImagePreview,
-          miniImg1: URL.createObjectURL(files[0]),
+          miniImg1: URL?.createObjectURL(files[0]),
         })
         setErrors({ ...errors, miniImg1: false })
       } else if (name === "miniImg2") {
         setNewRoom({ ...newRoom, miniImg2: files[0] })
         setMiniImagePreview({
           ...miniImagePreview,
-          miniImg2: URL.createObjectURL(files[0]),
+          miniImg2: URL?.createObjectURL(files[0]),
         })
         setErrors({ ...errors, miniImg2: false })
       } else if (name === "miniImg3") {
         setNewRoom({ ...newRoom, miniImg3: files[0] })
         setMiniImagePreview({
           ...miniImagePreview,
-          miniImg3: URL.createObjectURL(files[0]),
+          miniImg3: URL?.createObjectURL(files[0]),
         })
         setErrors({ ...errors, miniImg3: false })
       } else {
@@ -185,89 +185,88 @@ const Rooms = () => {
     }
   }
 
-const handleSubmit = async () => {
-  setLoading(true)
-  const newErrors = {
-    title: newRoom.title.trim() === "",
-    category: newRoom.category.trim() === "",
-    price: newRoom.price.trim() === "",
-    old_price:newRoom.old_price.trim()==="",
-    guests: newRoom.guests.trim() === "",
-    single_beds: String(newRoom.single_beds).trim() === "",
-    double_beds: String(newRoom.double_beds).trim() === "",
-    img: newRoom.img === null,
-    miniImg1: newRoom.miniImg1 === null,
-    miniImg2: newRoom.miniImg2 === null,
-    miniImg3: newRoom.miniImg3 === null,
-  }
-
-  if (String(newRoom.old_price).trim() !== "") {
-    newErrors.old_price = false; 
-  } else {
-    newErrors.old_price = false;
-  }
-
-  if (Object.values(newErrors).some((error) => error)) {
-    setErrors(newErrors)
-    return
-  }
-
-  const formData = new FormData()
-  formData.append("room_name", newRoom.title)
-  formData.append("room_category", newRoom.category)
-  formData.append("room_price", newRoom.price)
-  formData.append("room_guests", newRoom.guests)
-  formData.append("single_beds", newRoom.single_beds)
-  formData.append("double_beds", newRoom.double_beds)
-  formData.append("img1", newRoom.img)
-  formData.append("img2", newRoom.miniImg1)
-  formData.append("img3", newRoom.miniImg2)
-  formData.append("img4", newRoom.miniImg3)
-  if (String(newRoom.old_price).trim() !== "") {
-    formData.append("room_old_price", newRoom.old_price)
-  }
-
-  try {
-    const response = await fetch(
-      `${process.env.REACT_APP_API_URL}/add-room`,
-      {
-        method: "POST",
-        credentials: "include",
-        body: formData,
-      }
-    )
-
-    const data = await response.json()
-    if (data.success) {
-      notify()
-      setLoading(false)
-      getAllRooms()
-      setNewRoom({
-        title: "",
-        category: "",
-        price: "",
-        old_price: "",
-        guests: "",
-        single_beds: 0,
-        double_beds: 0,
-        img: null,
-        miniImg1: null,
-        miniImg2: null,
-        miniImg3: null,
-      })
-      setImagePreview(null)
-      setMiniImagePreview({ miniImg1: null, miniImg2: null, miniImg3: null })
-      handleClose()
-    } else {
-      console.error("Error adding room:", data.error)
-      setLoading(false)
+  const handleSubmit = async () => {
+    setLoading(true)
+    const newErrors = {
+      title: newRoom.title.trim() === "",
+      category: newRoom.category.trim() === "",
+      price: newRoom.price.trim() === "",
+      old_price: newRoom.old_price.trim() === "",
+      guests: newRoom.guests.trim() === "",
+      single_beds: String(newRoom.single_beds).trim() === "",
+      double_beds: String(newRoom.double_beds).trim() === "",
+      img: newRoom.img === null,
+      miniImg1: newRoom.miniImg1 === null,
+      miniImg2: newRoom.miniImg2 === null,
+      miniImg3: newRoom.miniImg3 === null,
     }
-  } catch (error) {
-    setLoading(false)
-    console.error("Error adding room:", error)
-  }
-}
 
+    if (String(newRoom.old_price).trim() !== "") {
+      newErrors.old_price = false
+    } else {
+      newErrors.old_price = false
+    }
+
+    if (Object.values(newErrors).some((error) => error)) {
+      setErrors(newErrors)
+      return
+    }
+
+    const formData = new FormData()
+    formData.append("room_name", newRoom.title)
+    formData.append("room_category", newRoom.category)
+    formData.append("room_price", newRoom.price)
+    formData.append("room_guests", newRoom.guests)
+    formData.append("single_beds", newRoom.single_beds)
+    formData.append("double_beds", newRoom.double_beds)
+    formData.append("img1", newRoom.img)
+    formData.append("img2", newRoom.miniImg1)
+    formData.append("img3", newRoom.miniImg2)
+    formData.append("img4", newRoom.miniImg3)
+    if (String(newRoom.old_price).trim() !== "") {
+      formData.append("room_old_price", newRoom.old_price)
+    }
+
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_API_URL}/add-room`,
+        {
+          method: "POST",
+          credentials: "include",
+          body: formData,
+        }
+      )
+
+      const data = await response.json()
+      if (data.success) {
+        notify()
+        setLoading(false)
+        getAllRooms()
+        setNewRoom({
+          title: "",
+          category: "",
+          price: "",
+          old_price: "",
+          guests: "",
+          single_beds: 0,
+          double_beds: 0,
+          img: null,
+          miniImg1: null,
+          miniImg2: null,
+          miniImg3: null,
+        })
+        setImagePreview(null)
+        setMiniImagePreview({ miniImg1: null, miniImg2: null, miniImg3: null })
+        handleClose()
+      } else {
+        console.error("Error adding room:", data.error)
+        setLoading(false)
+      }
+    } catch (error) {
+      setLoading(false)
+      console.error("Error adding room:", error)
+    }
+  }
 
   const handleEdit = (id) => {
     const roomToEdit = roomData.find((item) => item._id === id)
@@ -285,73 +284,71 @@ const handleSubmit = async () => {
     setEditModalOpen(true)
   }
 
-const handleEditSubmit = async () => {
-  setLoading(true)
+  const handleEditSubmit = async () => {
+    setLoading(true)
 
-  // Ensure all values are strings before calling .trim()
-  const roomOldPrice = String(editRoomData.room_old_price || "").trim()
-  const roomPrice = String(editRoomData.room_price || "").trim()
-  const roomName = String(editRoomData.room_name || "").trim()
-  const roomCategory = String(editRoomData.room_category || "").trim()
-  const roomGuests = String(editRoomData.room_guests || "").trim()
-  const roomSingleBeds = String(editRoomData.room_single_beds || "").trim()
-  const roomDoubleBeds = String(editRoomData.room_double_beds || "").trim()
+    // Ensure all values are strings before calling .trim()
+    const roomOldPrice = String(editRoomData.room_old_price || "").trim()
+    const roomPrice = String(editRoomData.room_price || "").trim()
+    const roomName = String(editRoomData.room_name || "").trim()
+    const roomCategory = String(editRoomData.room_category || "").trim()
+    const roomGuests = String(editRoomData.room_guests || "").trim()
+    const roomSingleBeds = String(editRoomData.room_single_beds || "").trim()
+    const roomDoubleBeds = String(editRoomData.room_double_beds || "").trim()
 
-  const formData = new FormData()
-  formData.append("room_name", roomName)
-  formData.append("room_category", roomCategory)
-  formData.append("room_price", roomPrice)
-  formData.append("room_old_price", roomOldPrice)
-  formData.append("room_guests", roomGuests)
-  formData.append("room_single_beds", roomSingleBeds)
-  formData.append("room_double_beds", roomDoubleBeds)
+    const formData = new FormData()
+    formData.append("room_name", roomName)
+    formData.append("room_category", roomCategory)
+    formData.append("room_price", roomPrice)
+    formData.append("room_old_price", roomOldPrice)
+    formData.append("room_guests", roomGuests)
+    formData.append("room_single_beds", roomSingleBeds)
+    formData.append("room_double_beds", roomDoubleBeds)
 
-  // Append new images if they are provided
-  if (editRoomData.room_image1 && editRoomData.room_image1.name) {
-    formData.append("img1", editRoomData.room_image1)
-  }
-  if (editRoomData.room_image2 && editRoomData.room_image2.name) {
-    formData.append("img2", editRoomData.room_image2)
-  }
-  if (editRoomData.room_image3 && editRoomData.room_image3.name) {
-    formData.append("img3", editRoomData.room_image3)
-  }
-  if (editRoomData.room_image4 && editRoomData.room_image4.name) {
-    formData.append("img4", editRoomData.room_image4)
-  }
-
-  try {
-    const response = await fetch(
-      `${process.env.REACT_APP_API_URL}/update-room/${editRoomData._id}`,
-      {
-        method: "PATCH",
-        credentials: "include",
-        body: formData,
-      }
-    )
-
-    const data = await response.json()
-    if (data.success) {
-      editnotify()
-      setLoading(false)
-      getAllRooms()
-      setEditModalOpen(false)
-      setEditingIndex(null)
-      setEditRoomData(null)
-      setEditImagePreview(null)
-      setMiniImagePreview({ miniImg1: null, miniImg2: null, miniImg3: null })
-      handleClose()
-    } else {
-      setLoading(false)
-      console.error("Error updating room:", data.error)
+    // Append new images if they are provided
+    if (editRoomData.room_image1 && editRoomData.room_image1.name) {
+      formData.append("img1", editRoomData.room_image1)
     }
-  } catch (error) {
-    setLoading(false)
-    console.error("Error updating room:", error)
+    if (editRoomData.room_image2 && editRoomData.room_image2.name) {
+      formData.append("img2", editRoomData.room_image2)
+    }
+    if (editRoomData.room_image3 && editRoomData.room_image3.name) {
+      formData.append("img3", editRoomData.room_image3)
+    }
+    if (editRoomData.room_image4 && editRoomData.room_image4.name) {
+      formData.append("img4", editRoomData.room_image4)
+    }
+
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_API_URL}/update-room/${editRoomData._id}`,
+        {
+          method: "PATCH",
+          credentials: "include",
+          body: formData,
+        }
+      )
+
+      const data = await response.json()
+      if (data.success) {
+        editnotify()
+        setLoading(false)
+        getAllRooms()
+        setEditModalOpen(false)
+        setEditingIndex(null)
+        setEditRoomData(null)
+        setEditImagePreview(null)
+        setMiniImagePreview({ miniImg1: null, miniImg2: null, miniImg3: null })
+        handleClose()
+      } else {
+        setLoading(false)
+        console.error("Error updating room:", data.error)
+      }
+    } catch (error) {
+      setLoading(false)
+      console.error("Error updating room:", error)
+    }
   }
-}
-
-
 
   return (
     <>
