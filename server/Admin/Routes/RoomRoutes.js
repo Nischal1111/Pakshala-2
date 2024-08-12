@@ -38,7 +38,7 @@ const {
 roomRoutes.get('/get-rooms', getRooms);
 
 // delete room item
-roomRoutes.delete('/delete-room/:id',jwtAuth, deleteRoom);
+roomRoutes.delete('/delete-room/:id', deleteRoom);
 
 // edit room item
 roomRoutes.patch('/update-room/:id', uploader.fields([
@@ -46,10 +46,10 @@ roomRoutes.patch('/update-room/:id', uploader.fields([
   { name: 'img2', maxCount: 1 },
   { name: 'img3', maxCount: 1 },
   { name: 'img4', maxCount: 1 }
-]),jwtAuth, editRoom);
+]), editRoom);
 
 //for updating status
-roomRoutes.route("/update-status-room/:id").patch(jwtAuth,updateStatusOfRoom)
+roomRoutes.route("/update-status-room/:id").patch(updateStatusOfRoom)
 
 
 module.exports = roomRoutes;

@@ -26,19 +26,20 @@ export default function Login() {
     setSee(!see)
   }
 
-  useEffect(()=>{
-    setTimeout(()=>{
-      if(localStorage.getItem("logout")==="true"){
-        Outnotify()
-        localStorage.removeItem("logout")
-      }
-    },500)
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     if (localStorage.getItem("logout") === "true") {
+  //       Outnotify()
+  //       localStorage.removeItem("logout")
+  //     }
+  //   }, 500)
 
-  const cookie = Cookies.get("accessToken")
-  if(cookie){
-    navigate("/")
-  }
-  },[])
+  //   const cookie = Cookies.get("accessToken")
+  //   if (userLogged()) {
+  //     console.log("cookie", cookie)
+  //     navigate("/")
+  //   }
+  // }, [])
 
   const handleSubmit = async (event) => {
     event.preventDefault()

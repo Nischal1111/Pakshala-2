@@ -23,13 +23,13 @@ const {
 
 
 // adding menu item
-menuRoutes.post('/add-menu-item', uploader.single('img') ,jwtAuth,addMenuItem);
+menuRoutes.post('/add-menu-item', uploader.single('img') ,addMenuItem);
 
 // get all menu items
 menuRoutes.get('/get-menu-items', getMenuItems);
 
 // delete menu item
-menuRoutes.delete('/delete-menu-item/:id',jwtAuth, deleteMenuItem);
+menuRoutes.delete('/delete-menu-item/:id', deleteMenuItem);
 
 
 

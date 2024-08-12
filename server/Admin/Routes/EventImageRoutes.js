@@ -17,7 +17,7 @@ const {
 
 // adding event images
 eventImageRoutes.route('/add-event-images').post(
-    jwtAuth, // secure route
+     
     uploader.array('images', 10), // handle up to 10 images at once, adjust as needed
     addImages
 );
@@ -26,7 +26,7 @@ eventImageRoutes.route('/add-event-images').post(
 eventImageRoutes.get('/get-event-images', getImages);
 
 // delete event image
-eventImageRoutes.delete('/delete-event-image/:id',jwtAuth, deleteImage);
+eventImageRoutes.delete('/delete-event-image/:id', deleteImage);
 
 
 module.exports = eventImageRoutes;

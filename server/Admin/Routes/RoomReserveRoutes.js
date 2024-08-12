@@ -19,9 +19,9 @@ const jwtAuth = require('../Middleware/authMiddleware');
 router.post('/request-room-reserve/:id', addRoomReserve);
 
 
-router.get('/get-room-reserves',jwtAuth ,getRoomReserves);
+router.get('/get-room-reserves',getRoomReserves);
 
 router.patch("/accept-room-reservation/:roomReservationId",acceptRoomReservation)
-router.route("/reject-room-reservation/:roomId").patch(jwtAuth,rejectRoomReservation)
+router.route("/reject-room-reservation/:roomId").patch(rejectRoomReservation)
 
 module.exports = router;

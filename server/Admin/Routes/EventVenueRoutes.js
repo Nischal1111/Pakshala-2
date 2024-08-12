@@ -18,7 +18,7 @@ const {
 router.post('/request-event-venue', addBookVenue);
 
 
-router.get('/get-event-venues',jwtAuth ,getBookVenues);
+router.get('/get-event-venues',getBookVenues);
 
 router.patch("/accept-event-booking/:id",acceptEventBooking);
 

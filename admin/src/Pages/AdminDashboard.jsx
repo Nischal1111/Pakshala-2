@@ -25,18 +25,19 @@ const AdminDashboard = () => {
   const { eventBookings, fetchEventBookings } = useContext(EventContext)
   const navigate = useNavigate()
   const location = useLocation()
-  const {token} = useContext(TokenContext)
+  const { token } = useContext(TokenContext)
 
-  useEffect(() => {
-    if (
-      !userLogged() &&
-      location.pathname !== "/forgotpassword" &&
-      location.pathname !== `/create-new-password/${token}` &&
-      location.pathname !== "/signup"
-    ) {
-      navigate("/login")
-    }
-  }, [navigate])
+  // useEffect(() => {
+  //   if (
+  //     !userLogged() &&
+  //     location.pathname !== "/forgotpassword" &&
+  //     location.pathname !== `/create-new-password/${token}` &&
+  //     location.pathname !== "/signup" &&
+  //     location.pathname !== "/login"
+  //   ) {
+  //     navigate("/login")
+  //   }
+  // }, [location.pathname])
 
   useEffect(() => {
     fetchEventBookings()

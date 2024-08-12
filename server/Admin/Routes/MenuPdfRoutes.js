@@ -23,7 +23,7 @@ MenuPdfRoutes.route('/get-menu-pdf').get(getMenuPdfs);
 
 
 // add menu pdf
-MenuPdfRoutes.route('/add-menu-pdf').post(jwtAuth,uploader.fields([
+MenuPdfRoutes.route('/add-menu-pdf').post(uploader.fields([
     { name: 'file', maxCount: 1 },
     { name: 'drink', maxCount: 1 }
 ]) 
@@ -31,7 +31,7 @@ MenuPdfRoutes.route('/add-menu-pdf').post(jwtAuth,uploader.fields([
 
 
 // delete menu pdf
-MenuPdfRoutes.route('/delete-menu-pdf/:id').delete(jwtAuth,deleteMenuPdf);
+MenuPdfRoutes.route('/delete-menu-pdf/:id').delete(deleteMenuPdf);
 
 
 module.exports = MenuPdfRoutes;

@@ -73,19 +73,21 @@ const adminLogin = async (req, res) => {
         const loggedInUser = await Admin.findById(authResult.admin._id).select("-password -refreshToken")
 
         // Set cookies and send response
-        res.cookie('refreshToken', authResult.refreshToken, {
-            httpOnly: true,
-            // sameSite: 'none',
-            expires: new Date(new Date().getTime() + 24 * 60 * 60 * 1000)
-        });
+        // res.cookie('refreshToken', authResult.refreshToken, {
+        //     httpOnly: true,
+        //     // sameSite: 'none',
+        //     expires: new Date(new Date().getTime() + 24 * 60 * 60 * 1000)
+        // });
 
-        res.cookie('accessToken', authResult.accessToken, {
-            httpOnly: false,
-            // sameSite: 'none',
-            expires: new Date(new Date().getTime() + 60 * 60 * 1000)
-        });
+        // res.cookie('accessToken', authResult.accessToken, {
+        //     httpOnly: false,
+        //     // sameSite: 'none',
+        //     expires: new Date(new Date().getTime() + 60 * 60 * 1000)
+        // });
+        const accessToken = authResult.accessToken;
+        const refreshToken = authResult.refreshToken;
 
-        res.status(200).json({ success: true, loggedInUser ,message: 'Login Successful.' });
+        res.status(200).json({ success: true, loggedInUser ,message: 'Login Successful.', accessToken, refreshToken });
     } catch (error) {
         console.log(error); 
         res.status(500).json({ success: false, message: 'Internal server error' });
@@ -139,20 +141,20 @@ const refreshAccessToken = async(req, res) => {
 const adminLogout = async(req, res) => {
     try {
         // Get admin id from authMiddleware
-        const userId = req.admin._id;
+        // const userId = req.admin._id;
 
-        //for finding the admin
-        const admin = await Admin.findById(userId);
-        if (!admin) {
-            return res.status(400).json({ success: false, message: 'Admin not found' });
-        }
+        // //for finding the admin
+        // const admin = await Admin.findById(userId);
+        // if (!admin) {
+        //     return res.status(400).json({ success: false, message: 'Admin not found' });
+        // }
 
-        //removing refresh token from the database
-        admin.refreshToken = '';
-        await admin.save();
+        // //removing refresh token from the database
+        // admin.refreshToken = '';
+        // await admin.save();
 
-        res.clearCookie('accessToken');
-        res.clearCookie('refreshToken');
+        // res.clearCookie('accessToken');
+        // res.clearCookie('refreshToken');
         res.status(200).json({ success: true, message: 'Logout Successful' });
     } catch (error) {
         console.log(error);
