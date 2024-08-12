@@ -3,7 +3,7 @@ import "../Css/About.css"
 import { ToastContainer } from 'react-toastify'
 import {Dialog,DialogActions,DialogTitle,Button,DialogContent} from "@mui/material"
 import QR from "../assets/QR.png"
-import ConfirmationModal from './ConfirmationModal'
+import OrderConfirmationModal from './OrderConfirmation'
 
 const ContactForm = () => {
   const[name,setName]=useState("")
@@ -79,7 +79,7 @@ const ContactForm = () => {
           </Dialog>
         </div>
       </div>
-      <ConfirmationModal message={"placed your order"} open={modalOpen} handleClose={handleModalClose}/>
+      <OrderConfirmationModal message={"placed your order"} open={modalOpen} handleClose={handleModalClose}/>
     </div>
   )
 }

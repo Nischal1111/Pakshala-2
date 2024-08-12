@@ -19,8 +19,7 @@ const ReservationDesc = () => {
           <motion.p 
             className="text-text" 
           >
-            Enjoy your stay in one of 280 rooms and suites, with views of either the Boudhanath Stupa or the lush gardens and surrounding mountain ranges.
-            Every room and suite has its own distinctly Nepalese interior, including local artifacts, wooden flooring and Tibetan handwoven carpeting.
+            Book your stay at Pakshalaa to enjoy our comfortable rooms with a blend of local charm and modern amenities. Whether you're here for a short visit or an extended stay, our rooms provide a peaceful retreat. Reserve your room now for a relaxing experience.
           </motion.p>
           <Link to="/rooms">
             <button className="res-button">All Rooms</button>

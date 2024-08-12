@@ -40,8 +40,7 @@ const EventGallary = () => {
         <h1 className="event-title">Events</h1>
         <div className="res-text-div">
           <motion.p className="text-text">
-            Enjoy your stay in one of 280 rooms and suites, with views of either the Boudhanath Stupa or the lush gardens and surrounding mountain ranges.
-            Every room and suite has its own distinctly Nepalese interior, including local artifacts, wooden flooring and Tibetan handwoven carpeting.
+            Host your next event at Pakshalaa Restaurant, where we offer the perfect venue for any occasion. From festive celebrations to live performances, our versatile space can be tailored to suit your needs. Book your event with us and enjoy great food, a vibrant atmosphere, and excellent service.
           </motion.p>
           <Link to="/about#bookvenue">
             <button className="event-button">Book Venue</button>

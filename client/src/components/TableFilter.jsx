@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FaUser } from "react-icons/fa";
-import { Dialog, DialogContent, DialogContentText, DialogTitle, CardContent, CardMedia, Typography } from '@mui/material';
+import { Dialog, DialogContent, DialogContentText, DialogTitle, CardContent, CardMedia, Typography,Button } from '@mui/material';
 import { ImSpinner2 } from "react-icons/im";
 import { fadeIn } from "../motion/motion";
 import { failednotify } from './Notify';
@@ -271,7 +271,9 @@ const TableFilter = () => {
                                 style={{ width: "100%", border: "gray 0.1px solid " }}
                             />
                         </div>
-                        <button type="submit">Reserve Table</button>
+                        <div className='overlay2' style={{marginBottom:"-1.4rem"}}>
+                            <button style={{backgroundColor:"var(--primary-color)",width:"fit-content"}}  type="submit" >Reserve Table</button>
+                        </div>
                     </form>
                 </DialogContent>
             </Dialog>
