@@ -71,12 +71,10 @@ const RoomCard = ({ room, index }) => {
 };
 
 const RoomFilter = () => {
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true); // Set initial state to true
     const [roomList, setRoomList] = useState([]);
     const [allRooms, setAllRooms] = useState([]);
     const [btnClicked, setClicked] = useState("all rooms");
-
-    
 
     const getAllRoomsClient = async () => {
         try {
@@ -92,6 +90,8 @@ const RoomFilter = () => {
             setRoomList(data.rooms || []);
         } catch (error) {
             console.error('Error fetching rooms:', error);
+        } finally {
+            setLoading(false); // Set loading to false after fetching
         }
     };
 
@@ -102,14 +102,11 @@ const RoomFilter = () => {
     const handleFilter = (e) => {
         const choice = e.target.value.toLowerCase();
         setClicked(choice);
-
-
-            if (choice === "all rooms") {
-                setRoomList(allRooms);
-            } else {
-                setRoomList(allRooms.filter(room => room.room_category === choice));
-            }
-
+        if (choice === "all rooms") {
+            setRoomList(allRooms);
+        } else {
+            setRoomList(allRooms.filter(room => room.room_category === choice));
+        }
     };
 
     return (

@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect } from "react"
 import {delnotify} from "./delnotify"
+import { userLogged } from './Cookie';
 
 export const RoomReserveContext = createContext()
 
@@ -27,9 +28,13 @@ const RoomReserveProvider = ({ children }) => {
     }
   }
 
-  useEffect(() => {
-    getReserveDetails()
-  }, [])
+ useEffect(() => {
+    if (userLogged()) {
+      getReserveDetails();
+    }else{
+      return
+    }
+  }, []);
 
   const handleStatusChange = async (reserveId) => {
     try {

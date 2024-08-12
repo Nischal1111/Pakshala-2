@@ -3,6 +3,7 @@ import Button from "@mui/material/Button"
 import CssBaseline from "@mui/material/CssBaseline"
 import TextField from "@mui/material/TextField"
 import { Link, useNavigate } from "react-router-dom"
+import { userLogged } from "../components/Cookie"
 import Grid from "@mui/material/Grid"
 import Box from "@mui/material/Box"
 import Typography from "@mui/material/Typography"
@@ -12,7 +13,6 @@ import { Enternotify, Outnotify, notify } from "../components/Notify"
 import { useEffect } from "react"
 import { ToastContainer } from "react-toastify"
 import { Wrongnotify } from "../components/Notify"
-import Cookies from "js-cookie"
 import { FaRegEyeSlash, FaRegEye } from "react-icons/fa"
 
 const defaultTheme = createTheme()
@@ -26,20 +26,17 @@ export default function Login() {
     setSee(!see)
   }
 
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     if (localStorage.getItem("logout") === "true") {
-  //       Outnotify()
-  //       localStorage.removeItem("logout")
-  //     }
-  //   }, 500)
+  useEffect(() => {
+    setTimeout(() => {
+      if (localStorage.getItem("logout") === "true") {
+        localStorage.removeItem("logout")
+      }
+    }, 100)
 
-  //   const cookie = Cookies.get("accessToken")
-  //   if (userLogged()) {
-  //     console.log("cookie", cookie)
-  //     navigate("/")
-  //   }
-  // }, [])
+    if (userLogged()) {
+      navigate("/")
+    }
+  }, [])
 
   const handleSubmit = async (event) => {
     event.preventDefault()

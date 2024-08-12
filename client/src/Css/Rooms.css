@@ -326,7 +326,8 @@
       color: var(--primary-color);
       font-family: "Lato";
       letter-spacing: 1px;
-      font-weight: 200;
+      text-decoration: line-through;
+      font-weight: 200; margin-right: .5rem;
       font-size: 0.9rem;
     }
   }

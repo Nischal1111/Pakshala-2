@@ -1,11 +1,13 @@
 import React, { createContext, useState, useEffect } from 'react';
 import {delnotify} from "./delnotify"
+import { userLogged } from './Cookie';
 
 export const TableReserveContext = createContext();
 
 const TableReserveProvider = ({ children }) => {
   const [tableReservations, setTableReservations] = useState([]);
   const [refetch,setRefetch]=useState(false)
+  const [isLoggedIn, setIsLoggedIn] = useState(userLogged());
 
   const fetchTableReservations = async () => {
     try {
@@ -26,9 +28,10 @@ const TableReserveProvider = ({ children }) => {
     }
   };
   useEffect(() => {
-    
-    fetchTableReservations();
-  }, []);
+    if(isLoggedIn){
+      fetchTableReservations();
+    }
+  }, [isLoggedIn]);
 
   useEffect(()=>{
     if(refetch){

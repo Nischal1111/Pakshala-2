@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect } from 'react';
 import {delnotify} from "./delnotify"
+import { userLogged } from './Cookie';
 
 export const CheckContext = createContext();
 
@@ -25,7 +26,11 @@ const CheckProvider = ({ children }) => {
   };
   
   useEffect(() => {
-    getOrderDetails();
+    if(userLogged()){
+      getOrderDetails();
+    }else{
+      return
+    }
   }, []);
 
  const handleStatusChange = async (orderId) => {

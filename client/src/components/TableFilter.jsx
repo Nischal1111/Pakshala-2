@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FaUser } from "react-icons/fa";
-import { Dialog, DialogContent, DialogContentText, DialogTitle,  CardContent, CardMedia, Typography} from '@mui/material';
+import { Dialog, DialogContent, DialogContentText, DialogTitle, CardContent, CardMedia, Typography } from '@mui/material';
 import { ImSpinner2 } from "react-icons/im";
 import { fadeIn } from "../motion/motion";
 import { failednotify } from './Notify';
@@ -23,8 +23,8 @@ const TableFilter = () => {
         time: '',
         guests: '',
     });
-    const [refetch,setreFetch]=useState(false)
-
+    const [refetch, setReFetch] = useState(false);
+    
     const handleClickOpen = (table) => {
         setSelectedTable(table);
         setOpen(true);
@@ -46,8 +46,8 @@ const TableFilter = () => {
     const [modalOpen, setModalOpen] = useState(false);
     const handleModalClose = () => {
         setModalOpen(false);
-        setreFetch(true)
-    }
+        setReFetch(true);
+    };
 
     const getAllTable = async () => {
         setLoading(true);
@@ -57,7 +57,7 @@ const TableFilter = () => {
             if (data.success) {
                 setTableList(data.tableItems);
                 setFilteredTables(data.tableItems);
-                setreFetch(false)
+                setReFetch(false);
             }
         } catch (error) {
             console.error(error);
@@ -71,10 +71,10 @@ const TableFilter = () => {
     }, []);
 
     useEffect(() => {
-    if (refetch) {
-      getAllTable()
-    }
-  }, [refetch]);
+        if (refetch) {
+            getAllTable();
+        }
+    }, [refetch]);
 
     const handleFilter = (e) => {
         const choice = e.target.value.toLowerCase();
@@ -110,7 +110,6 @@ const TableFilter = () => {
         }
     };
 
-    // Function to get today's date in YYYY-MM-DD format
     const getTodayDate = () => {
         const today = new Date();
         const yyyy = today.getFullYear();
@@ -119,7 +118,6 @@ const TableFilter = () => {
         return `${yyyy}-${mm}-${dd}`;
     };
 
-    // Function to get the current time in HH:MM format
     const getCurrentTime = () => {
         const today = new Date();
         const hours = String(today.getHours()).padStart(2, '0');
@@ -159,7 +157,7 @@ const TableFilter = () => {
                             className='singleroom-card'
                             style={{ backgroundColor: "#F3EEEA", position: "relative" }}
                             variants={fadeIn("up", "spring", index * 0.01, 0.1)}
-                            viewport={{ once: "true" }}
+                            viewport={{ once: true }}
                             initial="hidden"
                             whileInView="show"
                         >
@@ -190,7 +188,7 @@ const TableFilter = () => {
                                     }}
                                     disabled={table.tableStatus !== "Available"}
                                 >
-                                    {table.tableStatus === "Booked" ? "Reserved" : 
+                                    {table.tableStatus === "Booked" ? "Reserved" :
                                         table.tableStatus === "Pending" ? "In Queue" : "Reserve"}
                                 </button>
                             </div>
@@ -217,7 +215,7 @@ const TableFilter = () => {
                                 required
                                 value={formData.name}
                                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                                style={{width:"100%",border:"gray 0.1px solid"}}
+                                style={{ width: "100%", border: "gray 0.1px solid" }}
                             />
                         </div>
                         <div>
@@ -227,7 +225,7 @@ const TableFilter = () => {
                                 placeholder='Email'
                                 value={formData.email}
                                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                style={{width:"100%",border:"gray 0.1px solid "}}
+                                style={{ width: "100%", border: "gray 0.1px solid " }}
                             />
                         </div>
                         <div>
@@ -238,57 +236,47 @@ const TableFilter = () => {
                                 minLength={10}
                                 value={formData.contact}
                                 onChange={(e) => setFormData({ ...formData, contact: e.target.value })}
-                                style={{width:"100%",border:"gray 0.1px solid "}}
+                                style={{ width: "100%", border: "gray 0.1px solid " }}
+                            />
+                        </div>
+                        <div>
+                            <input
+                                type="date"
+                                min={getTodayDate()}
+                                required
+                                placeholder='Date'
+                                value={formData.date}
+                                onChange={(e) => setFormData({ ...formData, date: e.target.value })}
+                                style={{ width: "100%", border: "gray 0.1px solid " }}
+                            />
+                        </div>
+                        <div>
+                            <input
+                                type="time"
+                                min={getCurrentTime()}
+                                required
+                                placeholder='Time'
+                                value={formData.time}
+                                onChange={(e) => setFormData({ ...formData, time: e.target.value })}
+                                style={{ width: "100%", border: "gray 0.1px solid " }}
                             />
                         </div>
                         <div>
                             <input
                                 type="number"
                                 required
-                                placeholder='Guests'
+                                placeholder='Number of Guests'
                                 value={formData.guests}
                                 onChange={(e) => setFormData({ ...formData, guests: e.target.value })}
-                                style={{width:"100%",border:"gray 0.1px solid "}}
+                                style={{ width: "100%", border: "gray 0.1px solid " }}
                             />
                         </div>
-                        <div style={{marginTop:".3rem",marginBottom:"-1rem"}}>
-                            <label htmlFor="" style={{marginTop:".3rem",marginBottom:"-.5rem"}}>Date</label>
-                            <input
-                                type="date"
-                                required
-                                placeholder='Date to book'
-                                value={formData.date}
-                                onChange={(e) => setFormData({ ...formData, date: e.target.value })}
-                                min={getTodayDate()}
-                                style={{width:"100%",border:"gray 0.1px solid",marginTop:"0rem"}}
-                            />
-                        </div>
-                        <div style={{marginTop:"2rem",marginBottom:"-1rem"}}>
-                            <label htmlFor="" style={{marginTop:"1rem",marginBottom:"1rem"}}>Time</label>
-                            <input
-                                type="time"
-                                required
-                                placeholder='Estimated arrival time'
-                                value={formData.time}
-                                onChange={(e) => setFormData({ ...formData, time: e.target.value })}
-                                min={getCurrentTime()}
-                                style={{width:"100%",border:"gray 0.1px solid ",marginTop:"0rem"}}
-                            />
-                        </div>
-                        <div style={{display:"flex",justifyContent:"space-between",marginTop:"2rem",gap:"1rem",fontSize:"15px",cursor:"pointer"}}>
-                        <button style={{border:"none",letterSpacing:"1px"}} onClick={handleClose} className='form-cancel'>
-                            CANCEL
-                        </button>
-                        <button type='submit' style={{border:"none",letterSpacing:"1px",transition:"all .3s"}} className='form-reserve'>
-                            RESERVE
-                        </button>
-                        </div>
+                        <button type="submit">Reserve Table</button>
                     </form>
                 </DialogContent>
-               
             </Dialog>
 
-            <ConfirmationModal open={modalOpen} handleClose={handleModalClose} message={"reserved a table"} />
+            <ConfirmationModal open={modalOpen} onClose={handleModalClose} />
         </div>
     );
 };

@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react"
+import React, { useEffect, useState,useContext } from "react"
 import { useNavigate, useLocation } from "react-router-dom"
 import Sidebar from "../components/Sidebar"
 import "../css/admindashboard.css"
@@ -27,30 +27,25 @@ const AdminDashboard = () => {
   const location = useLocation()
   const { token } = useContext(TokenContext)
 
-  // useEffect(() => {
-  //   if (
-  //     !userLogged() &&
-  //     location.pathname !== "/forgotpassword" &&
-  //     location.pathname !== `/create-new-password/${token}` &&
-  //     location.pathname !== "/signup" &&
-  //     location.pathname !== "/login"
-  //   ) {
-  //     navigate("/login")
-  //   }
-  // }, [location.pathname])
+  useEffect(() => {
+    if (
+      !userLogged() &&
+      location.pathname !== "/forgotpassword" &&
+      location.pathname !== `/create-new-password/${token}` &&
+      location.pathname !== "/login"
+    ) {
+      navigate("/login")
+    }
+  }, [location.pathname])
 
   useEffect(() => {
-    fetchEventBookings()
-    getReserveDetails()
-    getOrderDetails()
-    fetchTableReservations()
-    setTimeout(() => {
-      if (userLogged() && localStorage.getItem("notify") === "true") {
-        lognotify()
-        localStorage.removeItem("notify")
-      }
-    }, 200)
-  }, [])
+    if(userLogged()){
+      fetchEventBookings()
+      getReserveDetails()
+      getOrderDetails()
+      fetchTableReservations()
+    }
+    }, [])
 
   const Menunotification = orderDetails.filter(
     (order) => order.status === "Pending" || 0

@@ -8,7 +8,6 @@ import Events from "./Pages/Events";
 import Offer from "./Pages/Offer";
 import Sidebar from "./components/Sidebar";
 import Login from "./Pages/Login";
-import SignUp from "./Pages/SIgnUp";
 import MenuDash from "./components/MenuDash";
 import RoomsDash from "./components/RoomsDash";
 import TablesDash from "./components/TablesDash";
@@ -20,7 +19,7 @@ import { TokenContext } from "./components/TokenContext";
 function App() {
   const {token} = useContext(TokenContext)
   const location = useLocation();
-  const hideSidebar = ["/login", "/signup", "/forgotpassword", `/create-new-password/${token}`].includes(location.pathname);
+  const hideSidebar = ["/login", "/forgotpassword", `/create-new-password/${token}`].includes(location.pathname);
 
   return (
     <>
@@ -39,7 +38,6 @@ function App() {
         <Route path="/events" element={<Events />} />
         <Route path="/offers" element={<Offer />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<SignUp />} />
       </Routes>
     </>
   );

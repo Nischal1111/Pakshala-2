@@ -38,8 +38,7 @@ const Sidebar = () => {
       });
       const result = await response.json();
       if (result.success) {
-        localStorage.setItem("logout", "true");
-        Cookies.remove("accessToken");
+        localStorage.removeItem("notify");
         handleClose();
         navigate('/login');
       } else {

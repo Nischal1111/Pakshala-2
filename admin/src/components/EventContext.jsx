@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect } from 'react';
 import {delnotify} from './delnotify';
+import { userLogged } from './Cookie';
 
 
 export const EventContext = createContext();
@@ -27,8 +28,13 @@ const EventBookingProvider = ({ children }) => {
     }
   };
   useEffect(() => {
+    if(userLogged()){
 
-    fetchEventBookings();
+      fetchEventBookings();
+    }else{
+      return
+    }
+
   }, []);
 
 
